@@ -1,6 +1,6 @@
 import * as Slider from '@radix-ui/react-slider'
 import * as Switch from '@radix-ui/react-switch'
-import styles from './radix-styles.module.css'
+import { ReactComponent as IconSlider } from './assets/icon-slider.svg'
 
 function App() {
   return (
@@ -23,19 +23,21 @@ function App() {
             max={100}
             step={1}
             aria-label='Price'
-            className={styles.SliderRoot}
+            className='relative flex h-4 w-64 touch-none select-none items-center'
           >
-            <Slider.Track className={styles.SliderTrack}>
-              <Slider.Range className={styles.SliderRange} />
+            <Slider.Track className='relative h-2 flex-1 rounded-full bg-_empty-slider-bar'>
+              <Slider.Range className='absolute h-full rounded-full bg-_soft-cyan' />
             </Slider.Track>
-            <Slider.Thumb className={styles.SliderThumb} />
+            <Slider.Thumb className='flex h-10 w-10 cursor-pointer items-center justify-center rounded-full bg-_strong-cyan shadow-[0_15px_30px_rgba(42,239,219,0.8)] ring-_strong-cyan/50 ring-offset-2 focus:outline-none focus:ring-2 active:cursor-grabbing'>
+              <IconSlider />
+            </Slider.Thumb>
           </Slider.Root>
           <div>$ /month</div>
         </div>
 
         <div className='flex gap-4'>
           <div>Monthly Billing</div>
-          <Switch.Root className='relative h-6 w-12 rounded-full shadow-inner ring-offset-2 focus:ring-2 focus:ring-_strong-cyan data-[state=checked]:bg-_toggle-background data-[state=unchecked]:bg-_toggle-background'>
+          <Switch.Root className='relative h-6 w-12 rounded-full shadow-inner ring-offset-2 focus:outline-none focus:ring-2 focus:ring-_strong-cyan/50 data-[state=checked]:bg-_toggle-background data-[state=unchecked]:bg-_toggle-background hover:data-[state=unchecked]:bg-_soft-cyan hover:data-[state=checked]:bg-_soft-cyan'>
             <Switch.Thumb className='block h-4 w-4 translate-x-1 rounded-full bg-white shadow transition-transform data-[state=checked]:translate-x-7' />
           </Switch.Root>
           <div>
