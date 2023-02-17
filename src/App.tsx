@@ -35,8 +35,8 @@ function App() {
 
         <div className='flex gap-4'>
           <div>Monthly Billing</div>
-          <Switch.Root className={styles.SwitchRoot}>
-            <Switch.Thumb className={styles.SwitchThumb} />
+          <Switch.Root className='relative h-6 w-12 rounded-full shadow-inner ring-offset-2 focus:ring-2 focus:ring-_strong-cyan data-[state=checked]:bg-_toggle-background data-[state=unchecked]:bg-_toggle-background'>
+            <Switch.Thumb className='block h-4 w-4 translate-x-1 rounded-full bg-white shadow transition-transform data-[state=checked]:translate-x-7' />
           </Switch.Root>
           <div>
             Yearly Billing <span>-25%</span>
