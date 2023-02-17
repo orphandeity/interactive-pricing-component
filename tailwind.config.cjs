@@ -3,6 +3,9 @@ module.exports = {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
     extend: {
+      backgroundImage: {
+        circles: "url('./pattern-circles.svg')",
+      },
       colors: {
         '_soft-cyan': '#a5f3eb',
         '_strong-cyan': '#10d5c2',
@@ -16,7 +19,7 @@ module.exports = {
         '_dark-desaturated-blue': '#293356',
       },
       fontFamily: {
-        sans: ['Manrope', 'sans-serif'],
+        sans: ['ManropeVariable', 'sans-serif'],
       },
       screens: {
         mobile: '375px',
