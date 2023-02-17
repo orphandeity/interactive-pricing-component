@@ -3,9 +3,6 @@ module.exports = {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
     extend: {
-      backgroundImage: {
-        circles: "url('./pattern-circles.svg')",
-      },
       colors: {
         '_soft-cyan': '#a5f3eb',
         '_strong-cyan': '#10d5c2',

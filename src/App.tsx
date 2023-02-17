@@ -2,11 +2,12 @@ import * as Slider from '@radix-ui/react-slider'
 import * as Switch from '@radix-ui/react-switch'
 import { ReactComponent as IconSlider } from './assets/icon-slider.svg'
 import { ReactComponent as IconCheck } from './assets/icon-check.svg'
+import { ReactComponent as PatternCircles } from './assets/pattern-circles.svg'
 
 function App() {
   return (
     <main className='flex min-h-screen flex-col items-center justify-center gap-8'>
-      <header className='flex flex-col items-center gap-2 bg-circles bg-center bg-no-repeat py-8 desktop:py-16'>
+      <header className='relative flex flex-col items-center gap-2 py-8 desktop:py-16'>
         <h1 className='text-xl font-semibold desktop:text-3xl'>
           Simple, traffic-based pricing
         </h1>
@@ -14,6 +15,7 @@ function App() {
           Sign-up for our 30-day trial. <br className='desktop:hidden' />
           No credit card required.
         </p>
+        <PatternCircles className='absolute inset-0 left-1/2 top-1/2 -z-20 -translate-x-1/2 -translate-y-1/2' />
       </header>
 
       <form className='flex w-[340px] flex-col items-center gap-8 rounded-lg bg-white py-8 shadow-2xl desktop:w-[600px] desktop:px-12'>
