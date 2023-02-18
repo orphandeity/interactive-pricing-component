@@ -48,7 +48,7 @@ function App() {
   }, [plan, finalPrice, yearlyBilling])
 
   return (
-    <main className='flex min-h-screen flex-col items-center justify-center gap-8'>
+    <main className='relative flex min-h-screen flex-col items-center justify-center gap-8 pt-4'>
       <header className='relative flex flex-col items-center gap-2 py-8 desktop:py-16'>
         <h1 className='text-xl font-semibold desktop:text-3xl'>
           Simple, traffic-based pricing
@@ -60,7 +60,7 @@ function App() {
         <PatternCircles className='absolute inset-0 left-1/2 top-1/2 -z-20 -translate-x-1/2 -translate-y-1/2' />
       </header>
 
-      <form className='flex w-[340px] flex-col items-center gap-8 rounded-lg bg-white py-8 shadow-2xl desktop:w-[600px] desktop:px-12'>
+      <form className='mb-16 flex w-[340px] flex-col items-center gap-8 rounded-lg bg-white py-8 shadow-2xl desktop:w-[600px] desktop:px-12'>
         {/* Pricing Slider */}
         <div className='flex grid-cols-2 flex-col items-center justify-items-center gap-10 desktop:grid desktop:gap-0'>
           <p className='justify-self-start text-sm font-semibold uppercase tracking-widest text-_grayish-blue'>
@@ -138,19 +138,27 @@ function App() {
           </button>
         </div>
       </form>
+      <Attribution />
     </main>
   )
 }
 
 const Attribution = () => {
   return (
-    <div>
+    <div className='absolute bottom-4 w-full text-center text-xs text-_grayish-blue'>
       Challenge by{' '}
-      <a href='https://www.frontendmentor.io?ref=challenge' target='_blank'>
+      <a
+        href='https://www.frontendmentor.io?ref=challenge'
+        target='_blank'
+        className='text-blue-500'
+      >
         Frontend Mentor
       </a>
       . Coded by{' '}
-      <a href='https://www.frontendmentor.io/profile/orphandeity'>
+      <a
+        href='https://www.frontendmentor.io/profile/orphandeity'
+        className='text-blue-500'
+      >
         Jeff R Williams
       </a>
       .
