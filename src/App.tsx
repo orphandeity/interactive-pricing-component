@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react'
 import * as Slider from '@radix-ui/react-slider'
 import * as Switch from '@radix-ui/react-switch'
 import { ReactComponent as IconSlider } from './assets/icon-slider.svg'
@@ -5,6 +6,47 @@ import { ReactComponent as IconCheck } from './assets/icon-check.svg'
 import { ReactComponent as PatternCircles } from './assets/pattern-circles.svg'
 
 function App() {
+  const [plan, setPlan] = useState<1 | 2 | 3>(2)
+  const [traffic, setTraffic] = useState<number>(100)
+  const [finalPrice, setFinalPrice] = useState<number>(16)
+  const [yearlyBilling, setYearlyBilling] = useState<boolean>(false)
+
+  // Choose pricing plan
+  function handlePriceSlider(value: number[]) {
+    let [selection] = value
+    if (selection === 0) setPlan(1)
+    if (selection === 50) setPlan(2)
+    if (selection === 100) setPlan(3)
+  }
+
+  // Choose monthly or yearly billing
+  function handleBillingPlan(checked: boolean) {
+    setYearlyBilling(checked)
+  }
+
+  // Render Final Price
+  useEffect(() => {
+    let price
+    switch (plan) {
+      case 1:
+        price = 10
+        setTraffic(50)
+        break
+      case 2:
+        price = 16
+        setTraffic(100)
+        break
+      case 3:
+        price = 32
+        setTraffic(250)
+        break
+      default:
+        price = 16
+        break
+    }
+    setFinalPrice(yearlyBilling ? price * 0.75 : price)
+  }, [plan, finalPrice, yearlyBilling])
+
   return (
     <main className='flex min-h-screen flex-col items-center justify-center gap-8'>
       <header className='relative flex flex-col items-center gap-2 py-8 desktop:py-16'>
@@ -22,26 +64,29 @@ function App() {
         {/* Pricing Slider */}
         <div className='flex grid-cols-2 flex-col items-center justify-items-center gap-10 desktop:grid desktop:gap-0'>
           <p className='justify-self-start text-sm font-semibold uppercase tracking-widest text-_grayish-blue'>
-            100k Pageviews
+            {traffic}k Pageviews
           </p>
 
           <Slider.Root
             defaultValue={[50]}
             max={100}
-            step={1}
+            step={50}
             aria-label='Price'
+            onValueCommit={value => handlePriceSlider(value)}
             className='relative col-span-2 row-start-2 flex h-4 w-72 touch-none select-none items-center desktop:mt-8 desktop:w-[450px] desktop:py-8'
           >
             <Slider.Track className='relative h-2 flex-1 rounded-full bg-_empty-slider-bar'>
               <Slider.Range className='absolute h-full rounded-full bg-_soft-cyan' />
             </Slider.Track>
-            <Slider.Thumb className='flex h-10 w-10 cursor-pointer items-center justify-center rounded-full bg-_strong-cyan shadow-[0_15px_30px_rgba(42,239,219,0.8)] ring-_strong-cyan/50 ring-offset-2 will-change-transform focus:outline-none focus:ring-2 active:cursor-grabbing'>
+            <Slider.Thumb className='flex h-10 w-10 cursor-pointer items-center justify-center rounded-full bg-_strong-cyan shadow-[0_15px_30px_rgba(42,239,219,0.8)] ring-_strong-cyan/50 ring-offset-2 focus:outline-none focus:ring-2 active:cursor-grabbing'>
               <IconSlider />
             </Slider.Thumb>
           </Slider.Root>
 
           <div className='flex items-center gap-2'>
-            <span className='text-4xl font-bold desktop:text-5xl'>$16.00</span>{' '}
+            <span className='text-4xl font-bold desktop:text-5xl'>
+              ${finalPrice.toFixed(2)}
+            </span>{' '}
             <span className='text-_grayish-blue'>/ month</span>
           </div>
         </div>
@@ -51,8 +96,11 @@ function App() {
           <div className='absolute -left-[95px] desktop:left-[-99px]'>
             Monthly Billing
           </div>
-          <Switch.Root className='relative h-6 w-12 rounded-full shadow-inner ring-offset-2 transition-colors focus:outline-none focus:ring-2 focus:ring-_strong-cyan/50 data-[state=checked]:bg-_toggle-background data-[state=unchecked]:bg-_toggle-background hover:data-[state=unchecked]:bg-_soft-cyan hover:data-[state=checked]:bg-_soft-cyan'>
-            <Switch.Thumb className='block h-4 w-4 translate-x-1 rounded-full bg-white shadow transition-transform data-[state=checked]:translate-x-7' />
+          <Switch.Root
+            onCheckedChange={checked => handleBillingPlan(checked)}
+            className='relative h-6 w-12 rounded-full shadow-inner ring-offset-2 transition-colors focus:outline-none focus:ring-2 focus:ring-_strong-cyan/50 data-[state=checked]:bg-_toggle-background data-[state=unchecked]:bg-_toggle-background hover:data-[state=unchecked]:bg-_soft-cyan hover:data-[state=checked]:bg-_soft-cyan'
+          >
+            <Switch.Thumb className='block h-4 w-4 translate-x-1 rounded-full bg-white shadow transition-transform will-change-transform data-[state=checked]:translate-x-7' />
           </Switch.Root>
           {/* mobile version */}
           <div className='absolute -right-[136px] desktop:hidden'>
